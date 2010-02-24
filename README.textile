@@ -4,8 +4,7 @@ Bringing "git bisect" powers to RSpec.
 
 h2. run example
 
----
-#./bisect.rb spec/**/*_spec.rb spec/controllers/spaces/tickets_controller_spec.rb
+bc. #./bisect.rb spec/**/*_spec.rb spec/controllers/spaces/tickets_controller_spec.rb
 [.] rspec runner: ./script/spec
 [.] target spec : spec/controllers/spaces/tickets_controller_spec.rb
 [.] 123 candidate specs
@@ -21,4 +20,4 @@ h2. run example
 [.] running    3 specs.. Done. ( 18s) (28/2/1)         : target FAIL
 [.] running    2 specs.. Done. ( 17s) (27/2/1)         : target FAIL
 [*] found matching spec: spec/models/mailman_spec.rb
----
+
