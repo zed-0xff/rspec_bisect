@@ -1,0 +1,24 @@
+h1. rspec_bisect
+
+Bringing "git bisect" powers to RSpec.
+
+h2. run example
+
+---
+#./bisect.rb spec/**/*_spec.rb spec/controllers/spaces/tickets_controller_spec.rb
+[.] rspec runner: ./script/spec
+[.] target spec : spec/controllers/spaces/tickets_controller_spec.rb
+[.] 123 candidate specs
+[.] running   62 specs.. Done. ( 19s) (105/0/4)        : target OK
+[.] running   63 specs.. Done. ( 64s) (386/2/6)        : target FAIL
+[.] running   32 specs.. Done. ( 34s) (157/0/2)        : target OK
+[.] running   32 specs.. Done. ( 43s) (238/2/4)        : target FAIL
+[.] running   16 specs.. Done. ( 38s) (129/2/1)        : target FAIL
+[.] running    8 specs.. Done. ( 27s) (73/0)           : target OK
+[.] running    9 specs.. Done. ( 19s) (65/2/1)         : target FAIL
+[.] running    5 specs.. Done. ( 19s) (52/2/1)         : target FAIL
+[.] running    3 specs.. Done. ( 16s) (33/0)           : target OK
+[.] running    3 specs.. Done. ( 18s) (28/2/1)         : target FAIL
+[.] running    2 specs.. Done. ( 17s) (27/2/1)         : target FAIL
+[*] found matching spec: spec/models/mailman_spec.rb
+---
