@@ -21,3 +21,4 @@ bc. #./bisect.rb spec/**/*_spec.rb spec/controllers/spaces/tickets_controller_sp
 [.] running    2 specs.. Done. ( 17s) (27/2/1)         : target FAIL
 [*] found matching spec: spec/models/mailman_spec.rb
 
+learn more at "my technical blog":http://zed.0xff.me/bisect.
