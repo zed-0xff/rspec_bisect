@@ -1,24 +1,58 @@
 h1. rspec_bisect
 
-Bringing "git bisect" powers to RSpec.
+Brings "git bisect" powers to RSpec for your Ruby-on-Rails projects.
+"git bisect"'s purpose is to find a specific commit which had broken something.
+*rspec_bisect purpose is to find one spec that causes other spec(s) to fail when they are runned together.*
 
 h2. run example
 
-bc. #./bisect.rb spec/**/*_spec.rb spec/controllers/spaces/tickets_controller_spec.rb
+Put @bisect.rb@ in @Rails.root/spec/@ folder and run it like that:
+
+bc. #./spec/bisect.rb spec/**/*_spec.rb spec/controllers/spaces/tickets_controller_spec.rb
 [.] rspec runner: ./script/spec
 [.] target spec : spec/controllers/spaces/tickets_controller_spec.rb
 [.] 123 candidate specs
-[.] running   62 specs.. Done. ( 19s) (105/0/4)        : target OK
-[.] running   63 specs.. Done. ( 64s) (386/2/6)        : target FAIL
-[.] running   32 specs.. Done. ( 34s) (157/0/2)        : target OK
-[.] running   32 specs.. Done. ( 43s) (238/2/4)        : target FAIL
-[.] running   16 specs.. Done. ( 38s) (129/2/1)        : target FAIL
-[.] running    8 specs.. Done. ( 27s) (73/0)           : target OK
-[.] running    9 specs.. Done. ( 19s) (65/2/1)         : target FAIL
-[.] running    5 specs.. Done. ( 19s) (52/2/1)         : target FAIL
-[.] running    3 specs.. Done. ( 16s) (33/0)           : target OK
-[.] running    3 specs.. Done. ( 18s) (28/2/1)         : target FAIL
-[.] running    2 specs.. Done. ( 17s) (27/2/1)         : target FAIL
+[.] running   62 specs.. Done. ( 19s) (105/0/4) : target OK
+[.] running   63 specs.. Done. ( 60s) (384/2/6) : target FAIL
+[.] running   32 specs.. Done. ( 35s) (157/0/2) : target OK
+[.] running   32 specs.. Done. ( 47s) (236/2/4) : target FAIL
+[.] running   16 specs.. Done. ( 35s) (129/2/1) : target FAIL
+[.] running    8 specs.. Done. ( 28s) (73/0)    : target OK
+[.] running    9 specs.. Done. ( 22s) (65/2/1)  : target FAIL
+[.] running    5 specs.. Done. ( 18s) (52/2/1)  : target FAIL
+[.] running    3 specs.. Done. ( 17s) (33/0)    : target OK
+[.] running    3 specs.. Done. ( 17s) (28/2/1)  : target FAIL
+[.] running    2 specs.. Done. ( 17s) (27/2/1)  : target FAIL
 [*] found matching spec: spec/models/mailman_spec.rb
 
-learn more at "my technical blog":http://zed.0xff.me/bisect.
+h2. fork() saves your time
+
+Loading full Rails environment on each run is a pain.
+So, using @fork()@ in right place can save a lot of time.
+Check out this example, and compare to a previous one:
+
+bc. #./spec/bisect.rb spec/**/*_spec.rb spec/controllers/spaces/tickets_controller_spec.rb --fork
+[.] rspec runner: ./script/spec
+[.] target spec : spec/controllers/spaces/tickets_controller_spec.rb
+[.] 123 candidate specs
+[.] preloading Rails environment..
+[.] running   62 specs.. Done. (  9s) (105/0/4) : target OK
+[.] running   63 specs.. Done. ( 49s) (384/2/6) : target FAIL
+[.] running   32 specs.. Done. ( 21s) (157/1/2) : target OK
+[.] running   32 specs.. Done. ( 34s) (236/3/4) : target FAIL
+[.] running   16 specs.. Done. ( 24s) (129/3/1) : target FAIL
+[.] running    8 specs.. Done. ( 20s) (73/1)    : target OK
+[.] running    9 specs.. Done. (  9s) (65/3/1)  : target FAIL
+[.] running    5 specs.. Done. (  8s) (52/3/1)  : target FAIL
+[.] running    3 specs.. Done. (  4s) (33/1)    : target OK
+[.] running    3 specs.. Done. (  8s) (28/3/1)  : target FAIL
+[.] running    2 specs.. Done. (  7s) (27/3/1)  : target FAIL
+[*] found matching spec: spec/models/mailman_spec.rb
+
+First example took 315 seconds to run, second one only 193s. Considerable performance boost!
+
+h2. more
+
+See all command-line options by running @bisect.rb@ without any options or with @--help@.
+
+Learn more at "my technical blog":http://zed.0xff.me/bisect.
